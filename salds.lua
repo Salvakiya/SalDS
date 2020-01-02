@@ -47,7 +47,7 @@ end
 
 
 local struct_counter = 0
-local struct_cahce = {}
+local struct_cache = {}
 --[[
     struct("foo","float x,y;") or struct("float x,y;") are both valid
 ]]
