@@ -24,12 +24,18 @@ vec:push(ffi.new("struct Position", 10, 20))
 foo = vec:pop()
 ```
 
-iteration
+iteration - these functions are provided to help with the fact that these indexes start at 0 and not 1 like lua arrays
 ```lua
+--get the pointer to the c data
 local pointer = vec:ptr()
+
+--itersize() will return the size-1
 for i = 0, vec:itersize() do
   print(pointer[i])
 end
+
+--or iterate over I like so
 for i in vec:iterindex() do
   print(pointer[i])
-end```
+end
+```
