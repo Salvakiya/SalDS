@@ -3,8 +3,9 @@ Data Structures implemented with LuaJIT's FFI
 
 
 Current data structures are..
-**Vector(dynamic array)
-**Hashtable
+
+* Vector(dynamic array)
+* Hashtable
 
 The Hashtable is not ready for use and does contain bugs. The Vector SHOULD be ready for use.
 
