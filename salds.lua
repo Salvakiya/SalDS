@@ -73,7 +73,7 @@ local function struct(name_or_body, body)
 
     name = "struct "..name
     --define
-    ffi.cdef(table.concat{name, "{", structbody, "};"})
+    ffi.cdef(("%s { %s };"):format(name, structbody))
     struct_cache[body] = name
     return name
 end
@@ -299,14 +299,7 @@ hashtable_counter = 0
 local function new_hashtable_type(key_type,val_type)
     hashtable_counter = hashtable_counter+1
     local name = "__salds_hash_bucket_"..hashtable_counter
-    ffi.cdef([[
-        struct ]]..name..[[{
-            uint8_t occupied;
-            uint8_t distance;
-            ]]..key_type..[[ key;
-            ]]..val_type..[[ val;
-        };
-    ]])
+    ffi.cdef(("struct %s { uint8_t occupied, distance; %s key; %s val; };"):format(name, key_type, val_type))
     return function()
         local self = {
         _bucket_new = ffi.typeof("struct "..name),
