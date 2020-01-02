@@ -34,18 +34,6 @@ local function copy(dest, src, type, size)
     ffi.copy(dest,src,size*ffi.sizeof(type))
 end
 
-local function _allocate(self, reserve_n, shrink_to_fit)
-    --determine the new size
-    local new_capacity = math.max(1,reserve_n or 2*self._capacity, shrink_to_fit and 1 or 2*self._capacity)
-    local new_data = alloc(new_capacity, self._ctype) -- allocate new memory
-    local min_capacity = math.min(new_capacity, self._capacity) -- determine relevant area to copy
-    copy(new_data, self._c_pointer, self._ctype, min_capacity) -- copy data
-    free(self._c_pointer)
-    self._c_pointer = new_data
-    self._capacity = new_capacity
-end
-
-
 local struct_counter = 0
 local struct_cache = {}
 --[[
